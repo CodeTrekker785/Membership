@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP Member Card</title>
+
+<style>
+body{
+    background:#e5e5e5;
+    font-family: Arial, sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:40px;
+}
+
+.top-card{
+    width:350px;
+    height:200px;
+    background:black;
+    color:gold;
+    border-radius:15px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 10px 20px rgba(0,0,0,0.3);
+    margin-bottom:40px;
+}
+
+.top-card h1{
+    font-size:48px;
+    margin:0;
+}
+
+.top-card p{
+    margin:0;
+    letter-spacing:2px;
+}
+
+.gold-line{
+    width:100%;
+    height:12px;
+    background:gold;
+    margin-top:15px;
+}
+
+.bottom-card{
+    width:350px;
+    background:linear-gradient(to right,#f7c65a,#d89c28);
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+
+.profile-section{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.profile{
+    text-align:center;
+}
+
+.profile img{
+    width:100px;
+    height:100px;
+    border-radius:10px;
+    object-fit:cover;
+    border:3px solid black;
+    cursor:pointer;
+}
+
+.vip-title{
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.member{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.code{
+    font-weight:bold;
+    margin-top:5px;
+}
+
+.black-strip{
+    width:100%;
+    height:12px;
+    background:black;
+    margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-card">
+    <h1 contenteditable="true">VIP</h1>
+    <p contenteditable="true">MEMBER ONLY</p>
+    <div class="gold-line"></div>
+</div>
+
+<div class="bottom-card">
+    <div class="profile-section">
+
+        <!-- LEFT PROFILE -->
+        <div class="profile">
+            <h3 contenteditable="true">Dararat</h3>
+            
+            <label>
+                <input type="file" accept="image/*" hidden onchange="previewImage(event,'img1')">
+                <img id="img1" src="https://via.placeholder.com/100">
+            </label>
+
+            <div class="code" contenteditable="true">W2415</div>
+        </div>
+
+        <!-- CENTER -->
+        <div>
+            <div class="vip-title" contenteditable="true">VIP</div>
+            <div class="member" contenteditable="true">MEMBER ONLY</div>
+        </div>
+
+        <!-- RIGHT PROFILE -->
+        <div class="profile">
+            <h3 contenteditable="true">Mark Harmon</h3>
+            
+            <label>
+                <input type="file" accept="image/*" hidden onchange="previewImage(event,'img2')">
+                <img id="img2" src="https://via.placeholder.com/100">
+            </label>
+
+            <div class="code" contenteditable="true">QE2134</div>
+        </div>
+
+    </div>
+
+    <div class="black-strip"></div>
+</div>
+
+<script>
+function previewImage(event, imageId){
+    const reader = new FileReader();
+    reader.onload = function(){
+        document.getElementById(imageId).src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+</script>
+
+</body>
+</html>
