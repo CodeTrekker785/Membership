@@ -1,157 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VIP Member Card</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Membership Card</title>
+    <style>
+        :root {
+            --card-bg: #f0f2f5;
+            --border-color: #ccc;
+            --accent-red: #b30000;
+        }
 
-<style>
-body{
-    background:#e5e5e5;
-    font-family: Arial, sans-serif;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:40px;
-}
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0e0e0;
+            margin: 0;
+        }
 
-.top-card{
-    width:350px;
-    height:200px;
-    background:black;
-    color:gold;
-    border-radius:15px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    box-shadow:0 10px 20px rgba(0,0,0,0.3);
-    margin-bottom:40px;
-}
+        /* Card Container */
+        .id-card {
+            width: 500px;
+            height: 300px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            background-image: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+        }
 
-.top-card h1{
-    font-size:48px;
-    margin:0;
-}
+        /* Header Section */
+        .header {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-red);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
 
-.top-card p{
-    margin:0;
-    letter-spacing:2px;
-}
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #333; /* Placeholder for George Strait logo */
+            margin-right: 15px;
+            border: 2px solid #ddd;
+        }
 
-.gold-line{
-    width:100%;
-    height:12px;
-    background:gold;
-    margin-top:15px;
-}
+        .title-area h2 {
+            margin: 0;
+            font-size: 22px;
+            letter-spacing: 1px;
+            color: #333;
+        }
 
-.bottom-card{
-    width:350px;
-    background:linear-gradient(to right,#f7c65a,#d89c28);
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 10px 20px rgba(0,0,0,0.3);
-}
+        .membership-label {
+            color: var(--accent-red);
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 5px;
+            display: block;
+        }
 
-.profile-section{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+        /* Body Section */
+        .card-body {
+            display: flex;
+            gap: 20px;
+        }
 
-.profile{
-    text-align:center;
-}
+        /* Profile Photo Clickable Area */
+        .profile-container {
+            width: 140px;
+            height: 160px;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            overflow: hidden;
+            background: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
 
-.profile img{
-    width:100px;
-    height:100px;
-    border-radius:10px;
-    object-fit:cover;
-    border:3px solid black;
-    cursor:pointer;
-}
+        #profile-display {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-.vip-title{
-    text-align:center;
-    font-size:28px;
-    font-weight:bold;
-}
+        .photo-hint {
+            position: absolute;
+            font-size: 10px;
+            color: #777;
+            text-align: center;
+        }
 
-.member{
-    text-align:center;
-    margin-bottom:15px;
-}
+        /* Editable Text Fields */
+        .details {
+            flex-grow: 1;
+        }
 
-.code{
-    font-weight:bold;
-    margin-top:5px;
-}
+        .field {
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
 
-.black-strip{
-    width:100%;
-    height:12px;
-    background:black;
-    margin-top:20px;
-}
-</style>
+        input[type="text"], input[type="date"] {
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 16px;
+            color: #222;
+            width: 100%;
+            padding: 2px;
+            border-bottom: 1px dashed transparent;
+        }
+
+        input[type="text"]:hover, input[type="text"]:focus {
+            background: #fff9c4;
+            border-bottom: 1px dashed #999;
+            outline: none;
+        }
+
+        /* VIP Badge */
+        .vip-badge {
+            position: absolute;
+            right: 20px;
+            top: 110px;
+            width: 70px;
+            height: 70px;
+            background: #d4af37;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            border: 4px double #fff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+
+        .signature-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 10px;
+            border-top: 1px solid #eee;
+            padding-top: 5px;
+        }
+
+        #file-input { display: none; }
+    </style>
 </head>
-
 <body>
 
-<div class="top-card">
-    <h1 contenteditable="true">VIP</h1>
-    <p contenteditable="true">MEMBER ONLY</p>
-    <div class="gold-line"></div>
-</div>
-
-<div class="bottom-card">
-    <div class="profile-section">
-
-        <!-- LEFT PROFILE -->
-        <div class="profile">
-            <h3 contenteditable="true">Dararat</h3>
-            
-            <label>
-                <input type="file" accept="image/*" hidden onchange="previewImage(event,'img1')">
-                <img id="img1" src="https://via.placeholder.com/100">
-            </label>
-
-            <div class="code" contenteditable="true">W2415</div>
+<div class="id-card">
+    <div class="header">
+        <div class="logo-circle"></div>
+        <div class="title-area">
+            <h2>GEORGE STRAIT FANS CLUB</h2>
+            <span class="membership-label">MEMBERSHIP ID CARD</span>
         </div>
-
-        <!-- CENTER -->
-        <div>
-            <div class="vip-title" contenteditable="true">VIP</div>
-            <div class="member" contenteditable="true">MEMBER ONLY</div>
-        </div>
-
-        <!-- RIGHT PROFILE -->
-        <div class="profile">
-            <h3 contenteditable="true">Mark Harmon</h3>
-            
-            <label>
-                <input type="file" accept="image/*" hidden onchange="previewImage(event,'img2')">
-                <img id="img2" src="https://via.placeholder.com/100">
-            </label>
-
-            <div class="code" contenteditable="true">QE2134</div>
-        </div>
-
     </div>
 
-    <div class="black-strip"></div>
+    <div class="card-body">
+        <div class="profile-container" onclick="document.getElementById('file-input').click()">
+            <span class="photo-hint">Click to upload photo</span>
+            <img id="profile-display" src="" alt="">
+            <input type="file" id="file-input" accept="image/*">
+        </div>
+
+        <div class="details">
+            <div class="field">NAME: <input type="text" value="Shirley Strait"></div>
+            <div class="field">SEX: <input type="text" value="F" style="width: 30px;"></div>
+            <div class="field">STATE: <input type="text" value="Texas"></div>
+            <div class="field">STATUS: <input type="text" value="VIP MEMBER"></div>
+            
+            <div style="margin-top: 15px;">
+                <div class="field">ACTIVATION: <input type="text" value="13/06/2024"></div>
+                <div class="field">EXPIRATION: <input type="text" value="13/06/2025"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vip-badge">
+        <span style="font-size: 8px;">MEMBERSHIP</span>
+        <span>VIP</span>
+    </div>
+
+    <div class="signature-row">
+        <div>MEMBER SIGNATURE</div>
+        <div>CEO SIGNATURE</div>
+    </div>
 </div>
 
 <script>
-function previewImage(event, imageId){
-    const reader = new FileReader();
-    reader.onload = function(){
-        document.getElementById(imageId).src = reader.result;
+    // Script to handle image upload and preview
+    const fileInput = document.getElementById('file-input');
+    const profileDisplay = document.getElementById('profile-display');
+    const photoHint = document.querySelector('.photo-hint');
+
+    fileInput.onchange = evt => {
+        const [file] = fileInput.files;
+        if (file) {
+            profileDisplay.src = URL.createObjectURL(file);
+            photoHint.style.display = 'none'; // Hide hint once photo is loaded
+        }
     }
-    reader.readAsDataURL(event.target.files[0]);
-}
 </script>
 
 </body>
